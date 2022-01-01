@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-extension UIColor {
+extension NSUIColor {
     
     public struct Sensible {
         
@@ -298,7 +298,12 @@ extension UIColor {
 
 // MARK: - Helpers
 
-private func asset(_ name: String) -> UIColor {
-    // swiftlint:disable:next force_unwrapping
+private func asset(_ name: String) -> NSUIColor {
+    // swiftlint:disable force_unwrapping
+    #if canImport(AppKit)
+    NSColor(named: "Sensible Colors/\(name)", bundle: Bundle.module)!
+    #else
     UIColor(named: "Sensible Colors/\(name)", in: Bundle.module, compatibleWith: nil)!
+    #endif
+    // swiftlint:enable force_unwrapping
 }
